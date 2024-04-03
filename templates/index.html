@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <style>
+        /* Add CSS styles here */
+        body {
+            font-size: 40px; /* Adjust the font size as needed */
+            text-align: center; /* Center text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Recipes</h1>
+    <form action="/results" method="post">
+        <label for="ingredients">Enter Ingredients (comma-separated):</label><br>
+        <input type="text" id="ingredients" name="ingredients" placeholder="e.g., eggs, flour, sugar" style="margin-top: 10px;"><br>
+        <input type="submit" value="Search" style="margin-top: 10px;"> 
+    </form>
+</body>
+</html>
