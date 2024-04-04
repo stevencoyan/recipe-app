@@ -4,11 +4,13 @@ import pandas as pd
 
 def find_recipes_by_ingredients(ingredients, RAW_recipes):
     matching_recipes = RAW_recipes[RAW_recipes['ingredients'].apply(lambda ingredient_list: all(ingredient.lower() in ingredient_list.lower() for ingredient in ingredients))]
+    # make upper case the first letter of each word in the recipe name
+    matching_recipes['name'] = matching_recipes['name'].apply(lambda x: x.title())
     return matching_recipes[['name', 'id']]
 
 def count_and_rating(recipes, RAW_interactions):
     recipes['count'] = recipes['id'].apply(lambda x: RAW_interactions[RAW_interactions['recipe_id'] == x].shape[0])
-    recipes['rating'] = recipes['id'].apply(lambda x: RAW_interactions[RAW_interactions['recipe_id'] == x]['rating'].mean())
+    recipes['rating'] = recipes['id'].apply(lambda x: round(RAW_interactions[RAW_interactions['recipe_id'] == x]['rating'].mean(),2)) 
     recipes_sorted = recipes[['name', 'count', 'rating']].sort_values(by=['count', 'rating'], ascending=[False, False]).head(10)
     recipes_sorted.columns = ['Recipe Name', 'Reviews (#)', 'Average Rating']
     return recipes_sorted

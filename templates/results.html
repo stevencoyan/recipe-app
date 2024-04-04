@@ -16,16 +16,43 @@
             height: 100vh;
             flex-direction: column;
         }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid #4CAF50; /* Green border, 000 is black */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <h1>Recipe Results</h1>
     {% if recipes %}
-        <ul>
+        <table>
+            <tr>
+                <th>Recipe Name</th>
+                <th>Reviews</th>
+                <th>Stars</th>
+            </tr>
             {% for recipe in recipes %}
-                <li>{{ recipe['Recipe Name'] }} - Reviews: {{ recipe['Reviews (#)'] }}, Average Rating: {{ recipe['Average Rating'] }}</li>
+                <tr>
+                    <td>{{ recipe['Recipe Name'] }}</td>
+                    <td>{{ recipe['Reviews (#)'] }}</td>
+                    <td>{{ recipe['Average Rating'] }}</td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>No recipes found.</p>
     {% endif %}
