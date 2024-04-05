@@ -21,7 +21,7 @@ To get the Recipe Finder App running on your local machine, follow these steps:
 ### Installation
 1. Clone the repository to your local machine:
 
-https://github.com/stevencoyan/recipe-app.git
+git clone https://github.com/stevencoyan/recipe-app.git
 
 2. Navigate to the app's directory:
 
