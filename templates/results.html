@@ -47,7 +47,7 @@
             </tr>
             {% for recipe in recipes %}
                 <tr>
-                    <td>{{ recipe['Recipe Name'] }}</td>
+                    <td><a href="recipe{{ recipe['id'] }}">{{ recipe['Recipe Name'] }}</a></td>
                     <td>{{ recipe['Reviews (#)'] }}</td>
                     <td>{{ recipe['Average Rating'] }}</td>
                 </tr>

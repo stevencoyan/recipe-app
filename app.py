@@ -30,7 +30,7 @@ def search():
     else:
         return "No matching recipes found.", 404
     
-@app.route('/recipe/<int:recipe_id>', methods=['GET'])
+@app.route('/recipe<int:recipe_id>', methods=['GET'])
 def recipe(recipe_id):
     return render_template('recipe.html', recipe_id=recipe_id)
 
