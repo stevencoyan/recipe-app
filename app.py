@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import pandas as pd
-from recipe_processing import find_recipes_by_ingredients, count_and_rating
+from recipe_processing import find_recipes_by_ingredients, count_and_rating, recipe_info
 from flask_caching import Cache
 
 app = Flask(__name__)
@@ -32,7 +32,14 @@ def search():
     
 @app.route('/recipe<int:recipe_id>', methods=['GET'])
 def recipe(recipe_id):
-    return render_template('recipe.html', recipe_id=recipe_id)
+    # Call the recipe_info function to get the recipe details
+    recipe_details = recipe_info(recipe_id)
+    # Pass the recipe details to a new template for display dict
+    recipe_details = recipe_details.to_dict(orient='records')[0]
+
+
+    return render_template('recipe.html', recipe=recipe_details)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

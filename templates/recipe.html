@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe</title>
+    <title>Results</title>
+    <style>
+        body {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 2px solid #4CAF50; /* Green border, 000 is black */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <h1>{{ recipe['Recipe Name'] }}</h1>
+    <p>Minutes: {{ recipe['Minutes'] }}</p>
+    <p>Number of Steps: {{ recipe['Number of Steps'] }}</p>
+    <p>Number of Ingredients: {{ recipe['Number of Ingredients'] }}</p>
+    <p>Description: {{ recipe['Description'] }}</p>
+    <p>Ingredients: {{ recipe['Ingredients'] }}</p>
+    <p>Steps: {{ recipe['Steps'] }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Nutrition Facts (per serving)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Calories</td>
+                <td>{{ recipe['Calories'] }}</td>
+            </tr>
+            <tr>
+                <td>Fat</td>
+                <td>{{ recipe['Fat'] }}g</td>
+            </tr>
+            <tr>
+                <td>Protein</td>
+                <td>{{ recipe['Protein'] }}g</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
