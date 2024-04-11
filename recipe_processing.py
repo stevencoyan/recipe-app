@@ -93,20 +93,3 @@ class RecipeAnalyzer:
         recipe_info['Protein'] = recipe_info['Nutrition'].apply(lambda x: x[5])
         
         return recipe_info
-
-# Load the recipe and interaction data
-recipes = pd.read_csv('RAW_recipes.csv')
-reviews = pd.read_csv('RAW_interactions.csv')
-
-# Initialize the Class
-analyzer = RecipeAnalyzer(recipes, reviews)
-
-# Find recipes by ingredients
-ingredients = ['hummus','pita','tomato']
-recipe_subset = analyzer.find_recipes_by_ingredients(ingredients)
-
-# Get count and ratings for these recipes
-top_recipes = analyzer.count_and_rating(recipe_subset)
-
-# print review_summary
-print(top_recipes)
