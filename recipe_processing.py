@@ -1,3 +1,4 @@
+# This is a new header
 import pandas as pd
 import ast
 from typing import List
@@ -83,6 +84,8 @@ class RecipeAnalyzer:
             raise ValueError("Recipe ID not found in dataset.")
         recipe_info = recipe[['name', 'minutes', 'n_steps', 'n_ingredients', 'description', 'ingredients', 'steps', 'nutrition']]
         recipe_info.columns = ['Recipe Name', 'Minutes', 'Number of Steps', 'Number of Ingredients', 'Description', 'Ingredients', 'Steps', 'Nutrition']
+        # Convert the ingredients string representation of list to actual list
+        recipe_info['Ingredients'] = recipe_info['Ingredients'].apply(ast.literal_eval)
         
         # Convert the nutrition string representation of list to actual list
         recipe_info['Nutrition'] = recipe_info['Nutrition'].apply(ast.literal_eval)
@@ -93,3 +96,23 @@ class RecipeAnalyzer:
         recipe_info['Protein'] = recipe_info['Nutrition'].apply(lambda x: x[5])
         
         return recipe_info
+    
+# Load recipe and review data into pandas DataFrames from CSV files
+# recipes = pd.read_csv('RAW_recipes.csv')
+# reviews = pd.read_csv('RAW_interactions.csv')
+
+# # Instantiate the RecipeAnalyzer with the loaded data
+# recipe_analyzer = RecipeAnalyzer(recipes, reviews)
+
+# # Test the RecipeAnalyzer class with a sample search
+# ingredients = ['chicken', 'rice', 'soy sauce']
+# matching_recipes = recipe_analyzer.find_recipes_by_ingredients(ingredients)
+# detailed_recipes = recipe_analyzer.count_and_rating(matching_recipes)
+# info = recipe_analyzer.recipe_info(detailed_recipes.iloc[0]['id'])// print(detailed_recipes)
+
+# print(info.columns)
+
+
+
+
+    

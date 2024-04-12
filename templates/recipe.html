@@ -15,12 +15,13 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            position: relative;
         }
         table {
             width: 80%;
             border-collapse: collapse;
             margin-top: 20px;
-            border: 2px solid #4CAF50; /* Green border, 000 is black */
+            border: 2px solid #4CAF50;
         }
         th, td {
             border: 1px solid #ddd;
@@ -34,16 +35,31 @@
             background-color: #4CAF50;
             color: white;
         }
+        .capitalize {
+            text-transform: capitalize;
+        }
+        ul.ingredients-list {
+            list-style-type: disc; /* Adds bullet points */
+            padding-left: 20px; /* Adds padding inside the list */
+            margin: 10px 0; /* Adds vertical spacing around the list */
+            text-align: left;
+        }
     </style>
 </head>
 <body>
-    <h1>{{ recipe['Recipe Name'] }}</h1>
+    <h1 class="capitalize">{{ recipe['Recipe Name'] }}</h1>
     <p>Minutes: {{ recipe['Minutes'] }}</p>
-    <p>Number of Steps: {{ recipe['Number of Steps'] }}</p>
     <p>Number of Ingredients: {{ recipe['Number of Ingredients'] }}</p>
     <p>Description: {{ recipe['Description'] }}</p>
-    <p>Ingredients: {{ recipe['Ingredients'] }}</p>
-    <p>Steps: {{ recipe['Steps'] }}</p>
+    
+    <h2>Ingredients</h2>
+    <ul class="ingredients-list">
+        {% for ingredient in recipe['Ingredients'] %}
+        <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Steps:</strong> {{ recipe['Steps'] }}</p>
 
     <table>
         <thead>
