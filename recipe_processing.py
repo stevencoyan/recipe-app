@@ -1,4 +1,3 @@
-# This is a new header
 import pandas as pd
 import ast
 from typing import List
@@ -83,9 +82,13 @@ class RecipeAnalyzer:
         if recipe.empty:
             raise ValueError("Recipe ID not found in dataset.")
         recipe_info = recipe[['name', 'minutes', 'n_steps', 'n_ingredients', 'description', 'ingredients', 'steps', 'nutrition']]
+        
         recipe_info.columns = ['Recipe Name', 'Minutes', 'Number of Steps', 'Number of Ingredients', 'Description', 'Ingredients', 'Steps', 'Nutrition']
         # Convert the ingredients string representation of list to actual list
         recipe_info['Ingredients'] = recipe_info['Ingredients'].apply(ast.literal_eval)
+
+        # Convert the steps string representation of list to actual list
+        recipe_info['Steps'] = recipe_info['Steps'].apply(ast.literal_eval)
         
         # Convert the nutrition string representation of list to actual list
         recipe_info['Nutrition'] = recipe_info['Nutrition'].apply(ast.literal_eval)
@@ -101,16 +104,16 @@ class RecipeAnalyzer:
 # recipes = pd.read_csv('RAW_recipes.csv')
 # reviews = pd.read_csv('RAW_interactions.csv')
 
-# # Instantiate the RecipeAnalyzer with the loaded data
+# Instantiate the RecipeAnalyzer with the loaded data
 # recipe_analyzer = RecipeAnalyzer(recipes, reviews)
 
-# # Test the RecipeAnalyzer class with a sample search
+# Test the RecipeAnalyzer class with a sample search
 # ingredients = ['chicken', 'rice', 'soy sauce']
 # matching_recipes = recipe_analyzer.find_recipes_by_ingredients(ingredients)
 # detailed_recipes = recipe_analyzer.count_and_rating(matching_recipes)
-# info = recipe_analyzer.recipe_info(detailed_recipes.iloc[0]['id'])// print(detailed_recipes)
+# info = recipe_analyzer.recipe_info(detailed_recipes.iloc[0]['id'])
 
-# print(info.columns)
+# print(info['Steps'])
 
 
 

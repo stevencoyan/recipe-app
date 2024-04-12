@@ -1,4 +1,3 @@
-# This is a new header
 from flask import Flask, render_template, request
 import pandas as pd
 from recipe_processing import RecipeAnalyzer  # Ensure this module has the correct path or is in the same directory
@@ -8,7 +7,7 @@ app = Flask(__name__)
 # Configure cache, set up with simple cache type for ease of use and development
 cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
 
-# Load recipe and review data into pandas DataFrames from CSV files
+# Load recipe and review datas into pandas DataFrames from CSV files
 recipes = pd.read_csv('RAW_recipes.csv')
 reviews = pd.read_csv('RAW_interactions.csv')
 

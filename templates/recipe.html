@@ -6,22 +6,57 @@
     <title>Results</title>
     <style>
         body {
-            font-size: 20px;
+            font-size: 18px; /* Base font size increased for better readability */
             text-align: center;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: center; /* Center alignment vertically */
+            min-height: 100vh; /* Ensures it covers the whole viewport height */
             flex-direction: column;
-            position: relative;
+            background-color: #f4f4f4; /* Light grey background for minimalism */
+        }
+        h1 {
+            font-size: 2.0em; /* Larger font size for main title */
+            text-transform: capitalize; /* Only capitalize the first letter of each word for the recipe name */
+            margin: 0.5em 0;
+            color: #333; /* Dark grey for better contrast */
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 1.5em; /* Appropriately larger font size for sub-headers */
+            margin: 0.5em 0;
+        }
+        p, li, td, th {
+            font-size: 1em; /* Slightly larger font size for better readability */
+        }
+        .content-container {
+            display: flex;
+            width: 80%; /* Adjusted width for better responsiveness */
+            max-width: 960px; /* Max width of the content container */
+            justify-content: space-between; /* Space between the columns */
+            align-items: flex-start; /* Align items to the top */
+            text-align: left; /* Align text to the left inside the columns */
+        }
+        .column {
+            display: flex;
+            flex-direction: column; /* Stack children elements vertically */
+            padding: 10px;
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .ingredients, .nutrition {
+            width: 25%; /* Fixed width for side columns */
+        }
+        .steps {
+            width: 50%; /* Wider column for steps */
+            margin: 0 20px; /* Margin on the sides for spacing */
         }
         table {
-            width: 80%;
+            width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            border: 2px solid #4CAF50;
+            margin-top: 10px;
+            border: 1px solid #ccc;
         }
         th, td {
             border: 1px solid #ddd;
@@ -35,52 +70,75 @@
             background-color: #4CAF50;
             color: white;
         }
-        .capitalize {
-            text-transform: capitalize;
+        ul.ingredients-list, ol.steps-list {
+            padding-left: 20px;
+            margin: 10px 0;
         }
-        ul.ingredients-list {
-            list-style-type: disc; /* Adds bullet points */
-            padding-left: 20px; /* Adds padding inside the list */
-            margin: 10px 0; /* Adds vertical spacing around the list */
-            text-align: left;
+        ol.steps-list {
+            list-style-type: decimal;
+        }
+        a {
+            margin-top: 20px;
+            color: #4CAF50; /* Green color to match the table header */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em; /* Larger font size for link */
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1 class="capitalize">{{ recipe['Recipe Name'] }}</h1>
-    <p>Minutes: {{ recipe['Minutes'] }}</p>
-    <p>Number of Ingredients: {{ recipe['Number of Ingredients'] }}</p>
-    <p>Description: {{ recipe['Description'] }}</p>
+    <h1>{{ recipe['Recipe Name'] }}</h1> <!-- Capitalized specifically for the recipe name -->
+    <p>{{recipe['Description'] }}</p>
+    <p><strong>Time:</strong> {{ recipe['Minutes'] }} min.</p>
+        
+    <div class="content-container">
+        <div class="column ingredients">
+            <h3>Ingredients</h3>
+            <ul class="ingredients-list">
+                {% for ingredient in recipe['Ingredients'] %}
+                <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="column steps">
+            <h3>Steps</h3>
+            <ol class="steps-list">
+                {% for step in recipe['Steps'] %}
+                <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div class="column nutrition">
+            <h3>Nutrition Facts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Per Serving</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calories</td>
+                        <td>{{ recipe['Calories'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fat</td>
+                        <td>{{ recipe['Fat'] }}g</td>
+                    </tr>
+                    <tr>
+                        <td>Protein</td>
+                        <td>{{ recipe['Protein'] }}g</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     
-    <h2>Ingredients</h2>
-    <ul class="ingredients-list">
-        {% for ingredient in recipe['Ingredients'] %}
-        <li>{{ ingredient }}</li>
-        {% endfor %}
-    </ul>
-
-    <p><strong>Steps:</strong> {{ recipe['Steps'] }}</p>
-
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Nutrition Facts (per serving)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Calories</td>
-                <td>{{ recipe['Calories'] }}</td>
-            </tr>
-            <tr>
-                <td>Fat</td>
-                <td>{{ recipe['Fat'] }}g</td>
-            </tr>
-            <tr>
-                <td>Protein</td>
-                <td>{{ recipe['Protein'] }}g</td>
-            </tr>
-        </tbody>
-    </table>
+    <a href="/">New search</a>
 </body>
 </html>
