@@ -5,8 +5,7 @@ Recipe Finder App is a convenient way to discover recipes based on the ingredien
 
 ## Features
 - **Ingredient-based Search**: Simply enter the ingredients you want to use, and the app will list the most popular and highest-rated recipes that utilize them.
-- **Recipe Details**: Click on any recipe to view detailed information, including cooking instructions, nutritional facts, and serving sizes.
-- **Local Deployment**: Designed to run locally, ensuring your searches and data remain private.
+- **Recipe Details**: Click on any recipe to view detailed information, including a description of the recipe, cooking instructions, nutritional facts, 
 
 ## Data Source
 This app is powered by an extensive dataset from Food.com, featuring recipes and user interactions. For more information on the dataset, visit [this Kaggle link](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions?resource=download&select=RAW_recipes.csv).
@@ -40,10 +39,3 @@ This will start a local web server. Open a web browser and go to `http://localho
 
 ## Acknowledgments
 - Kaggle, for providing the dataset that powers this app.
-
-
-
-
-
-
-
